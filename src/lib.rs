@@ -87,7 +87,9 @@ async fn main() {
                 let mut struct_address: Option<Address> = None;
 
                 while struct_address.is_none() {
-                    sleep(Duration::from_millis(500)).await;
+                    // FIXME: Figure out a way to just detect if we're on the settings screen or the game
+                    // to avoid useless iterations because the game state isn't initialized yet.
+                    sleep(Duration::from_millis(2000)).await;
                     struct_address = get_game_state_struct_address(&process);
                 }
 
@@ -142,10 +144,6 @@ async fn main() {
 }
 
 fn get_game_state_struct_address(process: &Process) -> Option<Address> {
-    if process.get_module_address("System.dll").is_err() {
-        return None;
-    }
-
     for range in process.memory_ranges() {
         if let (Ok(address), Ok(size)) = (range.address(), range.size()) {
             let struct_address = SIGNATURE.scan_process_range(process, (address, size));
