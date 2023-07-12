@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'master'
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Commit
+        uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: hecrj/setup-rust-action@v1
+        with:
+          rust-version: stable
+          targets: wasm32-wasi
+
+      - name: Build
+        run: |
+          cargo b --locked
+
+      - name: Release
+        if: github.ref == 'refs/heads/master'
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+          name: Latest
+          tag_name: latest
+          body: This contains the latest version of the Sonic Suggests auto splitter.
+          files: ./target/wasm32-wasi/release/sonic_suggests_autosplitter.wasm
