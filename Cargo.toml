@@ -26,6 +26,9 @@ arrayvec = { version = "0.7.4", default-features = false }
 bitflags = "2.3.3"
 numtoa = "0.2.4"
 
+# This fixes memcmp not being exported to the wasi environment in no_std mode
+compiler_builtins = { version = "0.1.95", features = ["mem"] }
+
 [lib]
 crate-type = ["cdylib"]
 

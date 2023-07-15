@@ -1,5 +1,4 @@
-// This autosplitter is build with no_std in mind but we cannot actually enable it due to a bug with the wasi environment
-//#![no_std]
+#![no_std]
 
 use asr::{watcher::{Watcher, Pair}};
 

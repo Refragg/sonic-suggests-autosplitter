@@ -1,8 +1,10 @@
-// This autosplitter is build with no_std in mind but we cannot actually enable it due to a bug with the wasi environment
-//#![no_std]
-//
-//asr::panic_handler!();
-asr::async_main!(stable);
+#![no_std]
+
+// Required for ASR's nightly async_main
+#![feature(type_alias_impl_trait, const_async_blocks)]
+
+asr::panic_handler!();
+asr::async_main!(nightly);
 
 mod autosplitter;
 mod debug;

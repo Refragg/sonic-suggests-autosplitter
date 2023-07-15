@@ -58,6 +58,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "compiler_builtins"
+version = "0.1.95"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6866e0f3638013234db3c89ead7a14d278354338e7237257407500009012b23f"
+
+[[package]]
 name = "heck"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -101,6 +107,7 @@ dependencies = [
  "asr",
  "bitflags",
  "bytemuck",
+ "compiler_builtins",
  "numtoa",
 ]
 
