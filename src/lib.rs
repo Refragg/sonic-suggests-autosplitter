@@ -66,6 +66,8 @@ macro_rules! unwrap_or_continue {
 }
 
 async fn main() {
+    let settings = Settings::register();
+    
     let process_name = match asr::get_os() {
         Ok(result) => match result.as_str() {
             "windows" => WINDOWS_PROCESS_NAME,
@@ -77,8 +79,6 @@ async fn main() {
             panic!("Could not get operating system!");
         }
     };
-
-    let settings = Settings::register();
 
     autosplitter_startup();
 
