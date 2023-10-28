@@ -17,6 +17,7 @@ use asr::{
     watcher::Watcher,
     Address, Process,
 };
+use asr::settings::Gui;
 use autosplitter::*;
 use core::{str, time::Duration};
 use debug::print_game_state;
@@ -66,7 +67,7 @@ macro_rules! unwrap_or_continue {
 }
 
 async fn main() {
-    let settings = Settings::register();
+    let mut settings = Settings::register();
     
     let process_name = match asr::get_os() {
         Ok(result) => match result.as_str() {
@@ -86,6 +87,8 @@ async fn main() {
         let process = Process::wait_attach(process_name).await;
         process
             .until_closes(async {
+                settings.update();
+
                 let mut struct_address: Option<Address> = None;
 
                 while struct_address.is_none() {

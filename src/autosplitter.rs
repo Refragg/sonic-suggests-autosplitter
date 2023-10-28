@@ -1,6 +1,7 @@
 #![no_std]
 
-use asr::{print_message, timer, timer::TimerState, Settings};
+use asr::{print_message, timer, timer::TimerState};
+use asr::settings::Gui;
 use super::{GameStatePair, State};
 
 macro_rules! split_if_true {
@@ -9,7 +10,7 @@ macro_rules! split_if_true {
     };
 }
 
-#[derive(Settings)]
+#[derive(Gui)]
 pub struct Settings {
     /// Start timer on main menu
     #[default = true]
